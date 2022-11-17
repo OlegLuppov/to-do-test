@@ -1,0 +1,63 @@
+{
+  "name": "to-do-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.tsx",
+  "scripts": {
+    "build": "webpack --mode production ",
+    "start": "webpack serve --open --mode development",
+    "watch": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlegLuppov/to-do-test.git"
+  },
+  "author": "OlegLuppov <lupperpuper@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlegLuppov/to-do-test/issues"
+  },
+  "homepage": "https://github.com/OlegLuppov/to-do-test#readme",
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@reduxjs/toolkit": "^1.9.0",
+    "axios": "^1.1.3",
+    "firebase": "^9.14.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.2",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "less": "^4.1.3",
+    "less-loader": "^11.1.0",
+    "mini-css-extract-plugin": "^2.7.0",
+    "path": "^0.12.7",
+    "prettier": "^2.7.1",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
