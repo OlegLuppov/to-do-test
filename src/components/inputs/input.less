@@ -1,9 +1,19 @@
+
+
 .input-wrapper {
     position: relative;
    
     input {
         border: solid 1px #2196f3;
         border-radius: 10px;
-        font-size: 40px;
+        font-family: 'Roboto',sans-serif;
+        font-weight: 400;
+        font-size: calc(18px + (40 - 18) * (100vw - 400px) / (1920 - 400));
+
     }
+}
+
+.input-completed {
+    width: 62px;
+    height: auto;
 }

@@ -1,15 +1,23 @@
-import {createSlice,PayloadAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { TypeInitialState } from './typeInitialState'
+import { TypeListTodos } from '../components/ListTodos/typeListTodos'
 
+const initialState: TypeInitialState = {
+  arrTodos: [],
+  completed: false,
+}
 
-const flightSearchSlices = createSlice({
-    name:'to-do-test',
-    initialState:{
+const todosSlice = createSlice({
+  name: 'to-do-test',
+  initialState,
 
+  reducers: {
+    addTodo: (state, action: PayloadAction<TypeListTodos[]>) => {
+      state.arrTodos = action.payload
     },
-
-    reducers: {
-
-    }
+  },
 })
 
-export default flightSearchSlices.reducer
+export const { addTodo } = todosSlice.actions
+
+export default todosSlice.reducer
