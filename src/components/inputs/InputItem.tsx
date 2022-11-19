@@ -8,5 +8,13 @@ export const InputItem: React.FC<TypeInputTitle> = ({
   valueTitle,
   onChange,
 }) => {
-  return <input onChange={onChange} type={type} placeholder={placeholder} value={valueTitle} />
+  return (
+    <input
+      minLength={3}
+      onChange={onChange}
+      type={type}
+      placeholder={placeholder}
+      value={valueTitle}
+    />
+  )
 }

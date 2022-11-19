@@ -8,7 +8,7 @@ export const Main: React.FC = () => {
   return (
     <main>
       <FormTodo />
-      <ListTodos className="content-wrapper-todos" todos={arrTodos} />
+      <ListTodos todos={arrTodos} />
     </main>
   )
 }

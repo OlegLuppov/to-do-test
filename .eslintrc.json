@@ -21,7 +21,9 @@
     "no-alert": "warn",
     "no-console": "warn",
     "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".tsx"] }],
-    "@typescript-eslint/no-var-requires": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "array-callback-return": "off"
   },
   "settings": {
     "import/resolve": {
