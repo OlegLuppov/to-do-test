@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { Button } from '../buttons/ButtonTodos'
 import { InputDate } from '../inputs/InputDate'
 import { InputItem } from '../inputs/InputItem'
 import { Label } from '../inputs/labels/LableI'
-import { addTodo, changeTitle } from '../../store/slice'
+import { addTodo, changeTitle } from '../../store/sliceTodos'
 import './form.less'
 import './inputWrapper.less'
 
 export const FormTodo: React.FC = () => {
   const [valueTitle, setValueTitle] = useState('')
   const [valueDate, setValueDate] = useState('')
-  const title = useAppSelector((state) => state.toDos.title)
   const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
 
   const dispatch = useAppDispatch()
-
-  const newArrTodos = {
-    id: new Date().getMilliseconds(),
-    title: title,
-    date: valueDate,
-    completed: false,
-    classCompletedContent: 'content-todos',
-  }
 
   const changeInputDateHandler = (e: React.ChangeEvent<HTMLElement>) => {
     const target = e.target as HTMLInputElement
@@ -35,18 +26,26 @@ export const FormTodo: React.FC = () => {
   }
 
   const clickButtonHandler = (e: React.FormEvent<HTMLElement>) => {
+    if (valueTitle.length === 0) {
+      e.preventDefault()
+    }
     if (valueTitle.length >= 3) {
       e.preventDefault()
       dispatch(changeTitle(valueTitle))
+
+      const newArrTodos = {
+        id: new Date().getMilliseconds(),
+        title: valueTitle,
+        date: valueDate,
+        completed: false,
+        classCompletedContent: 'content-todos',
+        isPTag: true,
+        dateWarning: '',
+      }
+      dispatch(addTodo([newArrTodos, ...arrTodos]))
       setValueTitle('')
     }
   }
-
-  useEffect(() => {
-    if (title.length >= 3) {
-      dispatch(addTodo([newArrTodos, ...arrTodos]))
-    }
-  }, [title])
 
   return (
     <section className="form-wrapper">
@@ -55,7 +54,7 @@ export const FormTodo: React.FC = () => {
           <Label titleLabel="ваше дело" />
           <InputItem
             onChange={changeInputTitleHandler}
-            valueTitle={valueTitle}
+            value={valueTitle}
             type="text"
             placeholder="Введите дело"
           ></InputItem>

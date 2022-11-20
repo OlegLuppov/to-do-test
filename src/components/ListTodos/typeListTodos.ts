@@ -4,6 +4,8 @@ export type TypeListTodos = {
   date: string
   completed: boolean
   classCompletedContent: string
+  isPTag: boolean
+  dateWarning: string
 }
 
 export type TypeTodos = {

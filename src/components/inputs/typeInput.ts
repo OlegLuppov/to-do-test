@@ -3,7 +3,9 @@ import React from 'react'
 export type TypeInputTitle = {
   type: string
   placeholder: string
-  valueTitle: string
+  value?: string
+  autoFocus?: boolean
+
   onChange(e: React.ChangeEvent<HTMLInputElement>): void
 }
 

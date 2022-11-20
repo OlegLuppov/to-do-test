@@ -5,8 +5,9 @@ import { TypeInputTitle } from './typeInput'
 export const InputItem: React.FC<TypeInputTitle> = ({
   type,
   placeholder,
-  valueTitle,
+  value,
   onChange,
+  autoFocus,
 }) => {
   return (
     <input
@@ -14,7 +15,8 @@ export const InputItem: React.FC<TypeInputTitle> = ({
       onChange={onChange}
       type={type}
       placeholder={placeholder}
-      value={valueTitle}
+      value={value}
+      autoFocus={autoFocus}
     />
   )
 }

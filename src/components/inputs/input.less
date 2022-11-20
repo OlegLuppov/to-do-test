@@ -1,19 +1,20 @@
-
+@pointer: pointer;
 
 .input-wrapper {
-    position: relative;
-   
-    input {
-        border: solid 1px #2196f3;
-        border-radius: 10px;
-        font-family: 'Roboto',sans-serif;
-        font-weight: 400;
-        font-size: calc(18px + (40 - 18) * (100vw - 400px) / (1920 - 400));
+  position: relative;
 
-    }
+  input {
+    border: solid 1px #2196f3;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: calc(18px + (25 - 18) * (100vw - 400px) / (1920 - 400));
+    cursor: @pointer;
+  }
 }
 
 .input-completed {
-    margin: 0;
-    transform: scale(3.5);
+  margin: 0;
+  transform: scale(2);
+  cursor: @pointer;
 }

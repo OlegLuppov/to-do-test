@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypeInitialState } from './typeInitialState'
 import { TypeListTodos } from '../components/ListTodos/typeListTodos'
+import { currentDate } from '../components/constants/date'
 
 const initialState: TypeInitialState = {
   arrTodos: [],
@@ -19,6 +20,13 @@ const todosSlice = createSlice({
     changeTitle: (state, action: PayloadAction<string>) => {
       state.title = action.payload
     },
+    changeIsPTag: (state, action: PayloadAction<number>) => {
+      state.arrTodos.find((todo) => {
+        if (todo.id === action.payload) {
+          todo.isPTag = !todo.isPTag
+        }
+      })
+    },
     updateValue: (state, action: PayloadAction<string>) => {
       state.updateValue = action.payload
     },
@@ -26,6 +34,7 @@ const todosSlice = createSlice({
       state.arrTodos.find((todo) => {
         if (todo.id === action.payload) {
           todo.title = state.updateValue
+          todo.isPTag = !todo.isPTag
         }
       })
     },
@@ -45,10 +54,26 @@ const todosSlice = createSlice({
         }
       })
     },
+    warningDateTodo: (state, action: PayloadAction<string>) => {
+      state.arrTodos.map((todo) => {
+        if (currentDate > todo.date) {
+          todo.dateWarning = action.payload
+          todo.date = 'время истекло'
+        }
+      })
+    },
   },
 })
 
-export const { addTodo, changeTitle, removeTodo, complededTodo, updateTitle, updateValue } =
-  todosSlice.actions
+export const {
+  addTodo,
+  changeTitle,
+  removeTodo,
+  complededTodo,
+  updateTitle,
+  updateValue,
+  changeIsPTag,
+  warningDateTodo,
+} = todosSlice.actions
 
 export default todosSlice.reducer

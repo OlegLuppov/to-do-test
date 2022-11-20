@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { TypeTodos } from './typeListTodos'
 import { Button } from '../buttons/ButtonTodos'
 import { InputCheckBox } from '../inputs/InputCheckbox'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import {
+  updateValue,
+  complededTodo,
+  removeTodo,
+  updateTitle,
+  changeIsPTag,
+  warningDateTodo,
+} from '../../store/sliceTodos'
+import { InputItem } from '../inputs/InputItem'
 import './list.less'
-import { useAppDispatch } from '../../store/hooks'
-import { updateValue, complededTodo, removeTodo, updateTitle } from '../../store/slice'
-import { currentDate } from '../constants/date'
 
 export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
   const [valueTitle, setValueTitle] = useState('')
-  const [isPTag, setPTag] = useState(true)
+  const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
 
   const dispatch = useAppDispatch()
 
@@ -18,16 +25,9 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
     setValueTitle(target.value)
   }
 
-  const changePtoInput = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement
-    if (target.closest('p')) {
-      setPTag(false)
-    }
-  }
-
   useEffect(() => {
-    console.log(currentDate)
-  }, [])
+    dispatch(warningDateTodo('warning'))
+  }, [arrTodos])
 
   return (
     <section className="list-todos-wrapper">
@@ -40,19 +40,32 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                 completed={todo.completed}
               />
               <>
-                {isPTag ? (
-                  <p className={todo.classCompletedContent} onClick={changePtoInput}>
+                {todo.isPTag ? (
+                  <p
+                    className={todo.classCompletedContent}
+                    onClick={(e: React.MouseEvent) => {
+                      const target = e.target as HTMLElement
+                      if (target.closest('.content-todos')) {
+                        dispatch(changeIsPTag(todo.id))
+                      }
+                    }}
+                    defaultValue=""
+                  >
                     {todo.title}
                   </p>
                 ) : (
                   <form>
-                    <input type="text" autoFocus onChange={changeInputTitleHandler} />
+                    <InputItem
+                      type="текст"
+                      placeholder="редактировать"
+                      onChange={changeInputTitleHandler}
+                      autoFocus={true}
+                    />
                     <Button
                       nameButton="сохранить"
                       className="save-button"
                       onClick={(e: React.FormEvent<HTMLElement>) => {
                         e.preventDefault()
-                        setPTag(true)
                         dispatch(updateValue(valueTitle))
                         dispatch(updateTitle(todo.id))
                       }}
@@ -60,7 +73,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                   </form>
                 )}
               </>
-              <span>{todo.date}</span>
+              <span className={todo.dateWarning}>{todo.date}</span>
 
               <Button
                 onClick={() => dispatch(removeTodo(todo.id))}

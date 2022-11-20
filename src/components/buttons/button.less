@@ -1,55 +1,36 @@
-.button-create-todo {
+.buttonStyleItem {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: calc(18px + (40 - 18) * (100vw - 400px) / (1920 - 400));
+  font-size: calc(18px + (25 - 18) * (100vw - 400px) / (1920 - 400));
   color: white;
-  background-color: #4caf50;
   border: none;
   border-radius: 10px;
   box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
     rgb(0 0 0 / 12%) 0px 1px 5px 0px;
-   
+  cursor: pointer;
+  &:active {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+    -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+    box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  }
+}
 
-    &:active {
-        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-        -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-        box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-      }
+.button-create-todo {
+  .buttonStyleItem();
+  background-color: #4caf50;
 }
 
 .button-completed-todo {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: calc(18px + (40 - 18) * (100vw - 400px) / (1920 - 400));
-  color: white;
-  background-color:#4caf50;
-  border: none;
-  border-radius: 10px;
-  box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
-    rgb(0 0 0 / 12%) 0px 1px 5px 0px;
-
-    &:active {
-        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-        -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-        box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-      }
+  .buttonStyleItem();
+  background-color: #4caf50;
 }
 
 .button-delete-todo {
-  height: 62px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: calc(18px + (40 - 18) * (100vw - 400px) / (1920 - 400));
-  color: white;
-  background-color:#f44336;
-  border: none;
-  border-radius: 10px;
-  box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
-    rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+  .buttonStyleItem();
+  background-color: #f44336;
+}
 
-    &:active {
-        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-        -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-        box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-      }
+.save-button {
+  .buttonStyleItem();
+  background-color: blue;
 }
