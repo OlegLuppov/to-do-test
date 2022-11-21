@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypeInitialState } from './typeInitialState'
 import { TypeListTodos } from '../components/ListTodos/typeListTodos'
 import { currentDate } from '../components/constants/date'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '../components/fire_base/firebase'
 
 const initialState: TypeInitialState = {
   arrTodos: [],
@@ -52,6 +54,12 @@ const todosSlice = createSlice({
         } else {
           todo.classCompletedContent = 'content-todos '
         }
+        //  для себя: обновляем данные completed и classCompletedContent в firebase
+        updateDoc(doc(db, 'todos', `${todo.title}`), {
+          completed: todo.completed,
+          classCompletedContent: todo.classCompletedContent,
+        })
+        // ............................................
       })
     },
     warningDateTodo: (state, action: PayloadAction<string>) => {

@@ -36,7 +36,9 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
           return (
             <li key={todo.id}>
               <InputCheckBox
-                onChange={() => dispatch(complededTodo(todo.id))}
+                onChange={() => {
+                  dispatch(complededTodo(todo.id))
+                }}
                 completed={todo.completed}
               />
               <>
