@@ -53,4 +53,4 @@ Back-end:
 
 ## SCREENSHOT APP
 
-![Screenshot_1]()
+![Screenshot_1](https://github.com/OlegLuppov/to-do-test/tree/master/public/image/screenshots)
