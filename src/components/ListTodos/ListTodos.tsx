@@ -75,13 +75,15 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                   </form>
                 )}
               </>
-              <span className={todo.dateWarning}>{todo.date}</span>
+              <div className="date-wrapper">
+                <span className={todo.dateWarning}>{todo.date}</span>
 
-              <Button
-                onClick={() => dispatch(removeTodo(todo.id))}
-                nameButton="удалить"
-                className="button-delete-todo"
-              />
+                <Button
+                  onClick={() => dispatch(removeTodo(todo.id))}
+                  nameButton="удалить"
+                  className="button-delete-todo"
+                />
+              </div>
             </li>
           )
         })}
