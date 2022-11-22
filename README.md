@@ -1,6 +1,6 @@
 # to-do-test
 
-[Application link](olegluppov-todos-test.netlify.app)
+[Application link](https://olegluppov-todos-test.netlify.app/)
 
 ## job details
 
