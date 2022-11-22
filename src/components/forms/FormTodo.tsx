@@ -28,13 +28,17 @@ export const FormTodo: React.FC = () => {
   }
 
   const clickButtonHandler = (e: React.FormEvent<HTMLElement>) => {
+    // если value равно 0 в главном input тогда дело не создасться
     if (valueTitle.length === 0) {
       e.preventDefault()
     }
     if (valueTitle.length >= 3) {
+      // если value меньше трех символов и не равно 0  в главном input всплывет popup с предупреждением не менее 3 символов,
+      // если все ок создаем дело
       e.preventDefault()
-      dispatch(changeTitle(valueTitle))
+      dispatch(changeTitle(valueTitle)) // передаем value главного input в title todo (changeValue метод вызываем из store)
 
+      // создаем обьект todo со свойствами
       const todo = {
         id: new Date().getMilliseconds(),
         title: valueTitle,
@@ -44,6 +48,8 @@ export const FormTodo: React.FC = () => {
         isPTag: true,
         dateWarning: '',
       }
+      //..............................................
+
       // для себя пометка: создаю документ в firestore с ключем valueTitle и передаю туда обьект todo
       setDoc(doc(db, 'todos', `${valueTitle}`), todo)
       //.........................................
@@ -53,7 +59,7 @@ export const FormTodo: React.FC = () => {
         dispatch(addTodo(data)) // в store передаю массив todos из firestore
       })
 
-      setValueTitle('')
+      setValueTitle('') // очищаю value главного input в state
     }
   }
 

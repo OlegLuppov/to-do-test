@@ -8,9 +8,10 @@ import { ListTodos } from '../ListTodos/ListTodos'
 import { TypeListTodos } from '../ListTodos/typeListTodos'
 import './main.less'
 export const Main: React.FC = () => {
-  const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
+  const arrTodos = useAppSelector((state) => state.toDos.arrTodos) // получаем arrTodos из store => initialState
   const dispatch = useAppDispatch()
 
+  // при любом изменении на странице в store => initialState => arrTodos передаю массив todos из firestore
   useEffect(() => {
     if (arrTodos.length === 0) {
       onSnapshot(collection(db, 'todos'), (snapshot) => {
@@ -19,6 +20,7 @@ export const Main: React.FC = () => {
       })
     }
   }, [])
+  //................................................................................
 
   return (
     <main>

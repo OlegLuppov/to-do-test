@@ -15,18 +15,22 @@ import { InputItem } from '../inputs/InputItem'
 import './list.less'
 
 export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
-  const [valueTitle, setValueTitle] = useState('')
-  const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
+  const [valueTitle, setValueTitle] = useState('') // value из главного input записываем в state
+  const arrTodos = useAppSelector((state) => state.toDos.arrTodos) // получаем массив todos из store
 
   const dispatch = useAppDispatch()
 
+  // меняем value в store при вводе текста
   const changeInputTitleHandler = (e: React.ChangeEvent<HTMLElement>) => {
     const target = e.target as HTMLInputElement
     setValueTitle(target.value)
   }
+  //...................................................
 
   useEffect(() => {
+    // вызываем метод warningDateTodo при загрузке страницы из store
     dispatch(warningDateTodo('warning'))
+    //..............................................
   }, [arrTodos])
 
   return (
@@ -48,10 +52,9 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                     onClick={(e: React.MouseEvent) => {
                       const target = e.target as HTMLElement
                       if (target.closest('.content-todos')) {
-                        dispatch(changeIsPTag(todo.id))
+                        dispatch(changeIsPTag(todo.id)) // вызываем метод changeIsPTag из store(он тоглит isPTag свойство c true на false и меняет title )
                       }
                     }}
-                    defaultValue=""
                   >
                     {todo.title}
                   </p>
@@ -68,8 +71,8 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                       className="save-button"
                       onClick={(e: React.FormEvent<HTMLElement>) => {
                         e.preventDefault()
-                        dispatch(updateValue(valueTitle))
-                        dispatch(updateTitle(todo.title))
+                        dispatch(updateValue(valueTitle)) // обновляем title в initialState
+                        dispatch(updateTitle(todo.title)) // вызываем метод updateTitle из store для редактирования title
                       }}
                     />
                   </form>
@@ -79,7 +82,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                 <span className={todo.dateWarning}>{todo.date}</span>
 
                 <Button
-                  onClick={() => dispatch(removeTodo(todo.id))}
+                  onClick={() => dispatch(removeTodo(todo.id))} // вызываем метод removeTodo из store для удаления todo
                   nameButton="удалить"
                   className="button-delete-todo"
                 />
