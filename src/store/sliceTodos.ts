@@ -42,7 +42,7 @@ const todosSlice = createSlice({
         deleteDoc(doc(db, 'todos', `${action.payload}`)) // удаляю todo со старым title
         setDoc(doc(db, 'todos', `${todo.title}`), {
           // создаю новый todo в firestore
-          id: new Date().getMilliseconds(),
+          id: new Date().getMilliseconds() + 1,
           title: todo.title,
           date: todo.date,
           completed: todo.completed,
