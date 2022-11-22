@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypeInitialState } from './typeInitialState'
 import { TypeListTodos } from '../components/ListTodos/typeListTodos'
 import { currentDate } from '../components/constants/date'
-import { doc, updateDoc } from 'firebase/firestore'
+import { deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../components/fire_base/firebase'
 
 const initialState: TypeInitialState = {
@@ -32,20 +32,35 @@ const todosSlice = createSlice({
     updateValue: (state, action: PayloadAction<string>) => {
       state.updateValue = action.payload
     },
-    updateTitle: (state, action: PayloadAction<number>) => {
+    updateTitle: (state, action: PayloadAction<string>) => {
       state.arrTodos.find((todo) => {
-        if (todo.id === action.payload) {
+        if (todo.title === action.payload) {
           todo.title = state.updateValue
           todo.isPTag = !todo.isPTag
         }
+        deleteDoc(doc(db, 'todos', `${action.payload}`)) // удаляю todo со старым title
+        setDoc(doc(db, 'todos', `${todo.title}`), {
+          // создаю новый todo в firestore
+          id: new Date().getMilliseconds(),
+          title: todo.title,
+          date: todo.date,
+          completed: todo.completed,
+          classCompletedContent: todo.classCompletedContent,
+          isPTag: todo.isPTag,
+          dateWarning: todo.dateWarning,
+        })
       })
     },
 
     removeTodo: (state, action: PayloadAction<number>) => {
-      state.arrTodos = state.arrTodos.filter((todo) => todo.id !== action.payload)
+      state.arrTodos = state.arrTodos.filter((todo) => {
+        if (todo.id === action.payload) {
+          deleteDoc(doc(db, 'todos', `${todo.title}`))
+        }
+      })
     },
     complededTodo: (state, action: PayloadAction<number>) => {
-      state.arrTodos.find((todo) => {
+      state.arrTodos.map((todo) => {
         if (todo.id === action.payload) {
           todo.completed = !todo.completed
         }
@@ -65,8 +80,10 @@ const todosSlice = createSlice({
     warningDateTodo: (state, action: PayloadAction<string>) => {
       state.arrTodos.map((todo) => {
         if (currentDate > todo.date) {
-          todo.dateWarning = action.payload
-          todo.date = 'время истекло'
+          updateDoc(doc(db, 'todos', `${todo.title}`), {
+            dateWarning: action.payload,
+            date: 'время истекло',
+          })
         }
       })
     },

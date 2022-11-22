@@ -69,7 +69,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                       onClick={(e: React.FormEvent<HTMLElement>) => {
                         e.preventDefault()
                         dispatch(updateValue(valueTitle))
-                        dispatch(updateTitle(todo.id))
+                        dispatch(updateTitle(todo.title))
                       }}
                     />
                   </form>
