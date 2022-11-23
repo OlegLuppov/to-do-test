@@ -11,16 +11,14 @@ export const Main: React.FC = () => {
   const arrTodos = useAppSelector((state) => state.toDos.arrTodos) // получаем arrTodos из store => initialState
   const dispatch = useAppDispatch()
 
-  // при любом изменении на странице в store => initialState => arrTodos передаю массив todos из firestore
   useEffect(() => {
-    if (arrTodos.length === 0) {
-      onSnapshot(collection(db, 'todos'), (snapshot) => {
-        const data = snapshot.docs.map((doc) => doc.data() as TypeListTodos)
-        dispatch(addTodo(data))
-      })
-    }
+    // при любом изьенении страницы получаю из firestore массив totdos и передаю в initialState => arrTodos
+    onSnapshot(collection(db, 'list'), (snapshot) => {
+      const data = snapshot.docs.map((doc) => doc.data())
+      dispatch(addTodo(data[0].list as TypeListTodos[]))
+    })
+    //.........................................................................
   }, [])
-  //................................................................................
 
   return (
     <main>

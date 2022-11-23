@@ -28,10 +28,10 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
   //...................................................
 
   useEffect(() => {
-    // вызываем метод warningDateTodo при загрузке страницы из store
+    // вызываем метод warningDateTodo при изменеии массива arrTodos
     dispatch(warningDateTodo('warning'))
     //..............................................
-  }, [arrTodos])
+  }, [])
 
   return (
     <section className="list-todos-wrapper">
@@ -39,45 +39,49 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
         {todos.map((todo) => {
           return (
             <li key={todo.id}>
-              <InputCheckBox
-                onChange={() => {
-                  dispatch(complededTodo(todo.id))
-                }}
-                completed={todo.completed}
-              />
-              <>
-                {todo.isPTag ? (
-                  <p
-                    className={todo.classCompletedContent}
-                    onClick={(e: React.MouseEvent) => {
-                      const target = e.target as HTMLElement
-                      if (target.closest('.content-todos')) {
-                        dispatch(changeIsPTag(todo.id)) // вызываем метод changeIsPTag из store(он тоглит isPTag свойство c true на false и меняет title )
-                      }
-                    }}
-                  >
-                    {todo.title}
-                  </p>
-                ) : (
-                  <form>
-                    <InputItem
-                      type="текст"
-                      placeholder="редактировать"
-                      onChange={changeInputTitleHandler}
-                      autoFocus={true}
-                    />
-                    <Button
-                      nameButton="сохранить"
-                      className="save-button"
-                      onClick={(e: React.FormEvent<HTMLElement>) => {
-                        e.preventDefault()
-                        dispatch(updateValue(valueTitle)) // обновляем title в initialState
-                        dispatch(updateTitle(todo.title)) // вызываем метод updateTitle из store для редактирования title
+              <div className="content-wrapper">
+                <InputCheckBox
+                  onChange={() => {
+                    dispatch(complededTodo(todo.id))
+                  }}
+                  completed={todo.completed}
+                />
+                <>
+                  {todo.isPTag ? (
+                    <p
+                      className={todo.classCompletedContent}
+                      onClick={(e: React.MouseEvent) => {
+                        const target = e.target as HTMLElement
+                        if (target.closest('.content-todos')) {
+                          dispatch(changeIsPTag(todo.id)) // вызываем метод changeIsPTag из store(он тоглит isPTag свойство c true на false и меняет title )
+                        }
                       }}
-                    />
-                  </form>
-                )}
-              </>
+                    >
+                      {todo.title}
+                    </p>
+                  ) : (
+                    <form>
+                      <InputItem
+                        type="текст"
+                        placeholder="редактировать"
+                        onChange={changeInputTitleHandler}
+                        autoFocus={true}
+                      />
+                      <Button
+                        nameButton="сохранить"
+                        className="save-button"
+                        onClick={(e: React.FormEvent<HTMLElement>) => {
+                          e.preventDefault()
+
+                          dispatch(updateValue(valueTitle)) // обновляем title в initialState
+                          dispatch(updateTitle(todo.id)) // вызываем метод updateTitle из store для редактирования title
+                          setValueTitle('')
+                        }}
+                      />
+                    </form>
+                  )}
+                </>
+              </div>
               <div className="date-wrapper">
                 <span className={todo.dateWarning}>{todo.date}</span>
 

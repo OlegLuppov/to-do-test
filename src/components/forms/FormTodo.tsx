@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { Button } from '../buttons/ButtonTodos'
 import { InputDate } from '../inputs/InputDate'
 import { InputItem } from '../inputs/InputItem'
@@ -7,17 +7,15 @@ import { Label } from '../inputs/labels/LableI'
 import { addTodo, changeTitle } from '../../store/sliceTodos'
 import './form.less'
 import './inputWrapper.less'
-import { db } from '../fire_base/firebase'
-import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore'
-import { TypeListTodos } from '../ListTodos/typeListTodos'
 
 export const FormTodo: React.FC = () => {
   const [valueTitle, setValueTitle] = useState('')
   const [valueDate, setValueDate] = useState('')
+  const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
 
   const dispatch = useAppDispatch()
 
-  const changeInputDateHandler = async (e: React.ChangeEvent<HTMLElement>) => {
+  const changeInputDateHandler = (e: React.ChangeEvent<HTMLElement>) => {
     const target = e.target as HTMLInputElement
     setValueDate(target.value)
   }
@@ -39,8 +37,9 @@ export const FormTodo: React.FC = () => {
       dispatch(changeTitle(valueTitle)) // передаем value главного input в title todo (changeValue метод вызываем из store)
 
       // создаем обьект todo со свойствами
+      const todoId = new Date().getMilliseconds() + Math.random()
       const todo = {
-        id: new Date().getMilliseconds(),
+        id: todoId,
         title: valueTitle,
         date: valueDate,
         completed: false,
@@ -48,16 +47,8 @@ export const FormTodo: React.FC = () => {
         isPTag: true,
         dateWarning: '',
       }
-      //..............................................
 
-      // для себя пометка: создаю документ в firestore с ключем valueTitle и передаю туда обьект todo
-      setDoc(doc(db, 'todos', `${valueTitle}`), todo)
-      //.........................................
-
-      onSnapshot(collection(db, 'todos'), (snapshot) => {
-        const data = snapshot.docs.map((doc) => doc.data() as TypeListTodos)
-        dispatch(addTodo(data)) // в store передаю массив todos из firestore
-      })
+      dispatch(addTodo([todo, ...arrTodos])) // спредим обьект todo в inishialState => arrTodods
 
       setValueTitle('') // очищаю value главного input в state
     }
