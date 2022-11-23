@@ -31,7 +31,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
     // вызываем метод warningDateTodo при изменеии массива arrTodos
     dispatch(warningDateTodo('warning'))
     //..............................................
-  }, [])
+  }, [arrTodos])
 
   return (
     <section className="list-todos-wrapper">
