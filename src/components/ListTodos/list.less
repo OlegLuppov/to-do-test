@@ -1,7 +1,7 @@
 .font {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: calc(18px + (18 - 18) * (100vw - 400px) / (1920 - 400));
+  font-size: 16px;
 }
 
 .list-todos-wrapper {
@@ -32,13 +32,13 @@
 
       .content-wrapper {
         display: flex;
-        align-items:center;
+        align-items: center;
         gap: 15px;
 
         .content-todos {
           max-width: 700px;
-          padding: 20px;
           text-decoration: none;
+          text-align: left;
           cursor: pointer;
         }
 
@@ -49,10 +49,11 @@
 
       .date-wrapper {
         display: flex;
+        align-items: center;
         gap: 20px;
 
         span {
-          width: 180px;
+          width: 150px;
           text-align: center;
           .font();
           padding: 5px;

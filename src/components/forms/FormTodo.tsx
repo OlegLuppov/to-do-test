@@ -11,6 +11,10 @@ import './inputWrapper.less'
 export const FormTodo: React.FC = () => {
   const [valueTitle, setValueTitle] = useState('')
   const [valueDate, setValueDate] = useState('')
+  const [labelTitle, setLabelTitle] = useState('ваша задача')
+  const [labelDate, setLabelDate] = useState('дата')
+  const [labelTitleClass, setLabelTitleClass] = useState('label-item')
+  const [labelDateClass, setLabelDateClass] = useState('label-item')
   const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
 
   const dispatch = useAppDispatch()
@@ -29,13 +33,30 @@ export const FormTodo: React.FC = () => {
     // если value равно 0 в главном input тогда дело не создасться
     if (valueTitle.length === 0) {
       e.preventDefault()
+      setLabelTitle('не менне 3 символов')
+      setLabelTitleClass('label-title-warrning')
     }
-    if (valueTitle.length >= 3) {
+
+    if (valueDate.length === 0) {
+      e.preventDefault()
+      setLabelDate('выберите дату')
+      setLabelDateClass('label-date-warrning')
+    }
+    if (valueTitle.length >= 3 && valueDate.length === 0) {
+      e.preventDefault()
+      setLabelTitle('ваша задача')
+      setLabelTitleClass('label-item')
+    }
+
+    if (valueTitle.length >= 3 && valueDate.length !== 0) {
       // если value меньше трех символов и не равно 0  в главном input всплывет popup с предупреждением не менее 3 символов,
       // если все ок создаем дело
       e.preventDefault()
       dispatch(changeTitle(valueTitle)) // передаем value главного input в title todo (changeValue метод вызываем из store)
-
+      setLabelDate('датa')
+      setLabelDateClass('label-item')
+      setLabelTitle('ваша задача')
+      setLabelTitleClass('label-item')
       // создаем обьект todo со свойствами
       const todoId = new Date().getMilliseconds() + Math.random()
       const todo = {
@@ -51,6 +72,7 @@ export const FormTodo: React.FC = () => {
       dispatch(addTodo([todo, ...arrTodos])) // спредим обьект todo в inishialState => arrTodods
 
       setValueTitle('') // очищаю value главного input в state
+      setValueDate('')
     }
   }
 
@@ -58,21 +80,21 @@ export const FormTodo: React.FC = () => {
     <section className="form-wrapper">
       <form>
         <div className="input-wrapper">
-          <Label titleLabel="ваше дело" />
+          <Label className={labelTitleClass} titleLabel={labelTitle} />
           <InputItem
             onChange={changeInputTitleHandler}
             value={valueTitle}
             type="text"
-            placeholder="Введите дело"
+            placeholder="Введите задачу"
           ></InputItem>
         </div>
         <div className="input-wrapper">
-          <Label titleLabel="дата окончания" />
+          <Label className={labelDateClass} titleLabel={labelDate} />
           <InputDate onChange={changeInputDateHandler} valueDate={valueDate} />
         </div>
         <Button
           onClick={clickButtonHandler}
-          nameButton="создать дело"
+          nameButton="создать задачу"
           className="button-create-todo"
         />
       </form>

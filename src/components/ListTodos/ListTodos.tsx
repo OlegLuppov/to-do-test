@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TypeTodos } from './typeListTodos'
+import { TypeListTodos, TypeTodos } from './typeListTodos'
 import { Button } from '../buttons/ButtonTodos'
 import { InputCheckBox } from '../inputs/InputCheckbox'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -25,12 +25,21 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
     const target = e.target as HTMLInputElement
     setValueTitle(target.value)
   }
-  //...................................................
+
+  const changeContentHandler = (todo: TypeListTodos) => {
+    setValueTitle(todo.title)
+    dispatch(changeIsPTag(todo.id))
+  }
+
+  const saveContentHandler = (todo: TypeListTodos) => {
+    dispatch(updateValue(valueTitle))
+    dispatch(updateTitle(todo.id))
+    setValueTitle('')
+  }
 
   useEffect(() => {
     // вызываем метод warningDateTodo при изменеии массива arrTodos
     dispatch(warningDateTodo('warning'))
-    //..............................................
   }, [arrTodos])
 
   return (
@@ -49,13 +58,9 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                 <>
                   {todo.isPTag ? (
                     <p
+                      id={`${todo.id}`}
                       className={todo.classCompletedContent}
-                      onClick={(e: React.MouseEvent) => {
-                        const target = e.target as HTMLElement
-                        if (target.closest('.content-todos')) {
-                          dispatch(changeIsPTag(todo.id)) // вызываем метод changeIsPTag из store(он тоглит isPTag свойство c true на false и меняет title )
-                        }
-                      }}
+                      onClick={() => changeContentHandler(todo)}
                     >
                       {todo.title}
                     </p>
@@ -66,17 +71,12 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                         placeholder="редактировать"
                         onChange={changeInputTitleHandler}
                         autoFocus={true}
+                        value={valueTitle}
                       />
                       <Button
                         nameButton="сохранить"
                         className="save-button"
-                        onClick={(e: React.FormEvent<HTMLElement>) => {
-                          e.preventDefault()
-
-                          dispatch(updateValue(valueTitle)) // обновляем title в initialState
-                          dispatch(updateTitle(todo.id)) // вызываем метод updateTitle из store для редактирования title
-                          setValueTitle('')
-                        }}
+                        onClick={() => saveContentHandler(todo)}
                       />
                     </form>
                   )}

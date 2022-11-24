@@ -77,7 +77,7 @@ const todosSlice = createSlice({
       state.arrTodos.map((todo) => {
         if (currentDate > todo.date) {
           todo.dateWarning = action.payload
-          todo.date = 'срок выполнения истек'
+          todo.date = 'срок истек'
           updateDoc(doc(db, 'list', 'myTodos'), {
             // обновляем firestore
             list: state.arrTodos,

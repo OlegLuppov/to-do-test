@@ -1,3 +1,4 @@
 export type TypeLabel = {
-    titleLabel:string
+  titleLabel: string
+  className: string
 }
