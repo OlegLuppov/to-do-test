@@ -1,4 +1,4 @@
-export type TypeListTodos = {
+export type Todo = {
   id: number
   title: string
   date: string
@@ -8,6 +8,6 @@ export type TypeListTodos = {
   dateWarning: string
 }
 
-export type TypeTodos = {
-  todos: TypeListTodos[]
+export type Todos = {
+  todos: Todo[]
 }

@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { TypeListTodos, TypeTodos } from './typeListTodos'
-import { Button } from '../buttons/ButtonTodos'
-import { InputCheckBox } from '../inputs/InputCheckbox'
+import { Todo, Todos } from './typeListTodos'
+import { Button } from '../Button/Button'
+import { InputCheckBox } from '../Input/InputCheckbox'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import {
-  updateValue,
-  complededTodo,
-  removeTodo,
-  updateTitle,
-  changeIsPTag,
-  warningDateTodo,
-} from '../../store/sliceTodos'
-import { InputItem } from '../inputs/InputItem'
+import { removeTodo, warningDateTodo, updateTodo } from '../../store/sliceTodos'
+import { InputItem } from '../Input/InputItem'
 import './list.less'
 
-export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
+export const ListTodos: React.FC<Todos> = ({ todos }) => {
   const [valueTitle, setValueTitle] = useState('') // value из главного input записываем в state
   const arrTodos = useAppSelector((state) => state.toDos.arrTodos) // получаем массив todos из store
 
@@ -26,14 +19,13 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
     setValueTitle(target.value)
   }
 
-  const changeContentHandler = (todo: TypeListTodos) => {
+  const changeContentHandler = (todo: Todo) => {
     setValueTitle(todo.title)
-    dispatch(changeIsPTag(todo.id))
+    dispatch(updateTodo({ id: todo.id }))
   }
 
-  const saveContentHandler = (todo: TypeListTodos) => {
-    dispatch(updateValue(valueTitle))
-    dispatch(updateTitle(todo.id))
+  const saveContentHandler = (todo: Todo) => {
+    dispatch(updateTodo({ date: `${todo.date} update title`, title: valueTitle }))
     setValueTitle('')
   }
 
@@ -51,7 +43,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
               <div className="content-wrapper">
                 <InputCheckBox
                   onChange={() => {
-                    dispatch(complededTodo(todo.id))
+                    dispatch(updateTodo({ id: todo.id + 1 }))
                   }}
                   completed={todo.completed}
                 />
@@ -74,7 +66,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
                         value={valueTitle}
                       />
                       <Button
-                        nameButton="сохранить"
+                        name="сохранить"
                         className="save-button"
                         onClick={() => saveContentHandler(todo)}
                       />
@@ -87,7 +79,7 @@ export const ListTodos: React.FC<TypeTodos> = ({ todos }) => {
 
                 <Button
                   onClick={() => dispatch(removeTodo(todo.id))} // вызываем метод removeTodo из store для удаления todo
-                  nameButton="удалить"
+                  name="удалить"
                   className="button-delete-todo"
                 />
               </div>

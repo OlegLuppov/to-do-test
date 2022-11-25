@@ -2,8 +2,8 @@ import React from 'react'
 import './reset.less'
 import './fonts.less'
 import './app.less'
-import { Header } from '../headers/Header'
-import { Main } from '../main/Main'
+import { Header } from '../Header/Header'
+import { Main } from '../Main/Main'
 
 // Создаем главный компонент App в который бубут импортированы все остальные компаненты
 export const App: React.FC = () => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { Button } from '../buttons/ButtonTodos'
-import { InputDate } from '../inputs/InputDate'
-import { InputItem } from '../inputs/InputItem'
-import { Label } from '../inputs/labels/LableI'
+import { Button } from '../Button/Button'
+import { InputDate } from '../Input/InputDate'
+import { InputItem } from '../Input/InputItem'
+import { Label } from '../Input/labels/LableI'
 import { addTodo, changeTitle } from '../../store/sliceTodos'
 import './form.less'
 import './inputWrapper.less'
@@ -92,11 +92,7 @@ export const FormTodo: React.FC = () => {
           <Label className={labelDateClass} titleLabel={labelDate} />
           <InputDate onChange={changeInputDateHandler} valueDate={valueDate} />
         </div>
-        <Button
-          onClick={clickButtonHandler}
-          nameButton="создать задачу"
-          className="button-create-todo"
-        />
+        <Button onClick={clickButtonHandler} name="создать задачу" className="button-create-todo" />
       </form>
     </section>
   )
