@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Todo } from '../components/ListTodos/typeListTodos'
+import { Todo } from '../Types/typeListTodos'
 import { currentDate } from '../components/constants/date'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../components/fire_base/firebase'
@@ -17,9 +17,6 @@ const todosSlice = createSlice({
     addTodo: (state, action: PayloadAction<Todo[]>) => {
       state.arrTodos = action.payload // устанавливаем массив преданый в action.payload
     },
-    // changeTitle: (state, action: PayloadAction<string>) => {
-    //   state.title = action.payload // меняем title на action.payload
-    // },
 
     removeTodo: (state, action: PayloadAction<number>) => {
       state.arrTodos = state.arrTodos.filter((todo) => todo.id !== action.payload)

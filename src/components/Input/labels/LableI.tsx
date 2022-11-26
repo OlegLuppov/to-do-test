@@ -1,5 +1,5 @@
 import React from 'react'
-import { TypeLabel } from './typeLabel'
+import { TypeLabel } from '../../../Types/typeLabel'
 import './label.less'
 
 export const Label: React.FC<TypeLabel> = ({ titleLabel, className }) => {

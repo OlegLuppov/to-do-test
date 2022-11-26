@@ -66,7 +66,7 @@ export const FormTodo: React.FC = () => {
         classCompletedContent: 'content-todos',
         isPTag: true,
         isSpanTag: true,
-        dateWarning: '',
+        dateWarning: 'date-todo',
       }
 
       dispatch(addTodo([todo, ...arrTodos])) // спредим обьект todo в inishialState => arrTodods

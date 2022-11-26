@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonProps } from './typeButton'
+import { ButtonProps } from '../../interfaces/interfaceButton'
 import './button.less'
 
 export const Button: React.FC<ButtonProps> = ({ name, className, onClick }) => {

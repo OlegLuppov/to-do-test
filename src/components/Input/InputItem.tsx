@@ -1,6 +1,6 @@
 import React from 'react'
 import './input.less'
-import { TypeInputTitle } from './typeInput'
+import { TypeInputTitle } from '../../Types/typeInput'
 
 export const InputItem: React.FC<TypeInputTitle> = ({
   type,

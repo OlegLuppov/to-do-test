@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Todo, Todos } from './typeListTodos'
+import { Todo, Todos } from '../../Types/typeListTodos'
 import { Button } from '../Button/Button'
 import { InputCheckBox } from '../Input/InputCheckbox'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { removeTodo, warningDateTodo, updateTodo } from '../../store/sliceTodos'
 import { InputItem } from '../Input/InputItem'
 import './list.less'
+import { ButtonDeleted } from '../Button/buttonDeleted'
 
 export const ListTodos: React.FC<Todos> = ({ todos }) => {
   const [valueTitle, setValueTitle] = useState('') // value из главного input записываем в state
@@ -72,7 +73,7 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                       {todo.title}
                     </p>
                   ) : (
-                    <form>
+                    <form className="wrapper-form-save">
                       <InputItem
                         type="text"
                         placeholder="редактировать"
@@ -96,7 +97,7 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                       {todo.date}
                     </span>
                   ) : (
-                    <form>
+                    <form className="wrapper-form-save">
                       <InputItem
                         type="date"
                         placeholder="редактировать"
@@ -112,11 +113,7 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                     </form>
                   )}
                 </>
-                <Button
-                  onClick={() => dispatch(removeTodo(todo.id))} // вызываем метод removeTodo из store для удаления todo
-                  name="удалить"
-                  className="button-delete-todo"
-                />
+                <ButtonDeleted name="delete" onClick={() => dispatch(removeTodo(todo.id))} />
               </div>
             </li>
           )

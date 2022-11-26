@@ -5,7 +5,7 @@ import { addTodo } from '../../store/sliceTodos'
 import { db } from '../fire_base/firebase'
 import { FormTodo } from '../Form/FormTodo'
 import { ListTodos } from '../ListTodos/ListTodos'
-import { Todo } from '../ListTodos/typeListTodos'
+import { Todo } from '../../Types/typeListTodos'
 import './main.less'
 export const Main: React.FC = () => {
   const arrTodos = useAppSelector((state) => state.toDos.arrTodos) // получаем arrTodos из store => initialState
