@@ -59,7 +59,7 @@ const todosSlice = createSlice({
         }
         if (todo.id + 3 === props.id) {
           todo.date = props.date!
-          todo.dateWarning = ''
+          todo.dateWarning = 'date-todo'
           todo.isSpanTag = !todo.isSpanTag
         }
       })
