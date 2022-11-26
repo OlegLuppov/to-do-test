@@ -6,7 +6,6 @@ import { db } from '../components/fire_base/firebase'
 
 const initialState = {
   arrTodos: [] as Todo[],
-  title: '',
 }
 
 const todosSlice = createSlice({
@@ -18,9 +17,9 @@ const todosSlice = createSlice({
     addTodo: (state, action: PayloadAction<Todo[]>) => {
       state.arrTodos = action.payload // устанавливаем массив преданый в action.payload
     },
-    changeTitle: (state, action: PayloadAction<string>) => {
-      state.title = action.payload // меняем title на action.payload
-    },
+    // changeTitle: (state, action: PayloadAction<string>) => {
+    //   state.title = action.payload // меняем title на action.payload
+    // },
 
     removeTodo: (state, action: PayloadAction<number>) => {
       state.arrTodos = state.arrTodos.filter((todo) => todo.id !== action.payload)
@@ -57,9 +56,14 @@ const todosSlice = createSlice({
         } else {
           todo.classCompletedContent = 'content-todos ' // старый класс если false
         }
-        if (`${todo.date} update title` === props.date) {
+        if (todo.id + 2 === props.id) {
           todo.title = props.title!
           todo.isPTag = !todo.isPTag
+        }
+        if (todo.id + 3 === props.id) {
+          todo.date = props.date!
+          todo.dateWarning = ''
+          todo.isSpanTag = !todo.isSpanTag
         }
       })
       updateDoc(doc(db, 'list', 'myTodos'), {
@@ -70,6 +74,6 @@ const todosSlice = createSlice({
   },
 })
 
-export const { addTodo, changeTitle, removeTodo, warningDateTodo, updateTodo } = todosSlice.actions
+export const { addTodo, removeTodo, warningDateTodo, updateTodo } = todosSlice.actions
 
 export default todosSlice.reducer

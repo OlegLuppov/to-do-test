@@ -9,6 +9,7 @@ import './list.less'
 
 export const ListTodos: React.FC<Todos> = ({ todos }) => {
   const [valueTitle, setValueTitle] = useState('') // value из главного input записываем в state
+  const [valueDate, setValueDate] = useState('')
   const arrTodos = useAppSelector((state) => state.toDos.arrTodos) // получаем массив todos из store
 
   const dispatch = useAppDispatch()
@@ -18,15 +19,29 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
     const target = e.target as HTMLInputElement
     setValueTitle(target.value)
   }
+  const changeInputDateHandler = (e: React.ChangeEvent<HTMLElement>) => {
+    const target = e.target as HTMLInputElement
+    setValueDate(target.value)
+  }
 
   const changeContentHandler = (todo: Todo) => {
     setValueTitle(todo.title)
     dispatch(updateTodo({ id: todo.id }))
   }
 
+  const changeDateHandler = (todo: Todo) => {
+    setValueDate(todo.date)
+    dispatch(updateTodo({ id: todo.id + 3, date: valueDate }))
+  }
+
   const saveContentHandler = (todo: Todo) => {
-    dispatch(updateTodo({ date: `${todo.date} update title`, title: valueTitle }))
+    dispatch(updateTodo({ id: todo.id + 2, title: valueTitle }))
     setValueTitle('')
+  }
+
+  const saveDateHandler = (todo: Todo) => {
+    dispatch(updateTodo({ id: todo.id + 3, date: valueDate }))
+    setValueDate('')
   }
 
   useEffect(() => {
@@ -59,7 +74,7 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                   ) : (
                     <form>
                       <InputItem
-                        type="текст"
+                        type="text"
                         placeholder="редактировать"
                         onChange={changeInputTitleHandler}
                         autoFocus={true}
@@ -75,8 +90,28 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                 </>
               </div>
               <div className="date-wrapper">
-                <span className={todo.dateWarning}>{todo.date}</span>
-
+                <>
+                  {todo.isSpanTag ? (
+                    <span onClick={() => changeDateHandler(todo)} className={todo.dateWarning}>
+                      {todo.date}
+                    </span>
+                  ) : (
+                    <form>
+                      <InputItem
+                        type="date"
+                        placeholder="редактировать"
+                        onChange={changeInputDateHandler}
+                        autoFocus={true}
+                        value={valueDate}
+                      />
+                      <Button
+                        name="сохранить"
+                        className="save-button"
+                        onClick={() => saveDateHandler(todo)}
+                      />
+                    </form>
+                  )}
+                </>
                 <Button
                   onClick={() => dispatch(removeTodo(todo.id))} // вызываем метод removeTodo из store для удаления todo
                   name="удалить"

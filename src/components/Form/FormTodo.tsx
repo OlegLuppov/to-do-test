@@ -4,7 +4,7 @@ import { Button } from '../Button/Button'
 import { InputDate } from '../Input/InputDate'
 import { InputItem } from '../Input/InputItem'
 import { Label } from '../Input/labels/LableI'
-import { addTodo, changeTitle } from '../../store/sliceTodos'
+import { addTodo } from '../../store/sliceTodos'
 import './form.less'
 import './inputWrapper.less'
 
@@ -52,7 +52,6 @@ export const FormTodo: React.FC = () => {
       // если value меньше трех символов и не равно 0  в главном input всплывет popup с предупреждением не менее 3 символов,
       // если все ок создаем дело
       e.preventDefault()
-      dispatch(changeTitle(valueTitle)) // передаем value главного input в title todo (changeValue метод вызываем из store)
       setLabelDate('датa')
       setLabelDateClass('label-item')
       setLabelTitle('ваша задача')
@@ -66,6 +65,7 @@ export const FormTodo: React.FC = () => {
         completed: false,
         classCompletedContent: 'content-todos',
         isPTag: true,
+        isSpanTag: true,
         dateWarning: '',
       }
 

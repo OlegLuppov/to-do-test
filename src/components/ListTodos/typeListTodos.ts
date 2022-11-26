@@ -5,6 +5,7 @@ export type Todo = {
   completed: boolean
   classCompletedContent: string
   isPTag: boolean
+  isSpanTag: boolean
   dateWarning: string
 }
 
