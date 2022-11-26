@@ -7,6 +7,8 @@ import { Label } from '../Input/labels/LableI'
 import { addTodo } from '../../store/sliceTodos'
 import './form.less'
 import './inputWrapper.less'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '../fire_base/firebase'
 
 export const FormTodo: React.FC = () => {
   const [valueTitle, setValueTitle] = useState('')
@@ -73,6 +75,10 @@ export const FormTodo: React.FC = () => {
 
       setValueTitle('') // очищаю value главного input в state
       setValueDate('')
+      updateDoc(doc(db, 'list', 'myTodos'), {
+        // обновляем firestore
+        list: arrTodos,
+      })
     }
   }
 
