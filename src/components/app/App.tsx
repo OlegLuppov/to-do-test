@@ -3,7 +3,7 @@ import './reset.less'
 import './fonts.less'
 import './app.less'
 import { Header } from '../Header/Header'
-import { Main } from '../Main/Main'
+import { Main } from '../main/Main'
 
 // Создаем главный компонент App в который бубут импортированы все остальные компаненты
 export const App: React.FC = () => {
