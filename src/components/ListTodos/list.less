@@ -16,6 +16,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
     margin: 0;
     padding: 0;
@@ -39,6 +40,7 @@
         .wrapper-form-save {
           display: flex;
           gap: 10px;
+          align-items: center;
         }
 
         .content-todos {
@@ -63,6 +65,7 @@
         .wrapper-form-save {
           display: flex;
           gap: 10px;
+          align-items: center;
         }
 
         .date-todo {
@@ -75,8 +78,13 @@
         }
 
         .warning {
-          background-color: red;
-          border: none;
+          height: 24px;
+          text-align: center;
+          .font();
+          padding: 5px;
+          cursor: pointer;
+          border-bottom: 1px solid #f44336;
+          color: #f44336;
         }
         .performed {
           background-color: green;

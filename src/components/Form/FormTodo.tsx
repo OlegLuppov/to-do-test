@@ -86,17 +86,17 @@ export const FormTodo: React.FC = () => {
     <section className="form-wrapper">
       <form>
         <div className="input-wrapper">
-          <Label className={labelTitleClass} titleLabel={labelTitle} />
           <InputItem
             onChange={changeInputTitleHandler}
             value={valueTitle}
             type="text"
             placeholder="Введите задачу"
-          ></InputItem>
+          />
+          <Label className={labelTitleClass} titleLabel={labelTitle} />
         </div>
         <div className="input-wrapper">
-          <Label className={labelDateClass} titleLabel={labelDate} />
           <InputDate onChange={changeInputDateHandler} valueDate={valueDate} />
+          <Label className={labelDateClass} titleLabel={labelDate} />
         </div>
         <Button onClick={clickButtonHandler} name="создать задачу" className="button-create-todo" />
       </form>

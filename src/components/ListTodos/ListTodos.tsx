@@ -7,6 +7,7 @@ import { removeTodo, warningDateTodo, updateTodo } from '../../store/sliceTodos'
 import { InputItem } from '../Input/InputItem'
 import './list.less'
 import { ButtonDeleted } from '../Button/buttonDeleted'
+import { Label } from '../Input/labels/LableI'
 
 export const ListTodos: React.FC<Todos> = ({ todos }) => {
   const [valueTitle, setValueTitle] = useState('') // value из главного input записываем в state
@@ -74,13 +75,16 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                     </p>
                   ) : (
                     <form className="wrapper-form-save">
-                      <InputItem
-                        type="text"
-                        placeholder="редактировать"
-                        onChange={changeInputTitleHandler}
-                        autoFocus={true}
-                        value={valueTitle}
-                      />
+                      <div className="input-wrapper">
+                        <InputItem
+                          type="text"
+                          placeholder="редактировать"
+                          onChange={changeInputTitleHandler}
+                          autoFocus={true}
+                          value={valueTitle}
+                        />
+                        <Label className="label-item" titleLabel="изменить задачу" />
+                      </div>
                       <Button
                         name="сохранить"
                         className="save-button"
@@ -98,13 +102,16 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                     </span>
                   ) : (
                     <form className="wrapper-form-save">
-                      <InputItem
-                        type="date"
-                        placeholder="редактировать"
-                        onChange={changeInputDateHandler}
-                        autoFocus={true}
-                        value={valueDate}
-                      />
+                      <div className="input-wrapper">
+                        <InputItem
+                          type="date"
+                          placeholder="редактировать"
+                          onChange={changeInputDateHandler}
+                          autoFocus={true}
+                          value={valueDate}
+                        />
+                        <Label titleLabel="изменить дату" className="label-item" />
+                      </div>
                       <Button
                         name="сохранить"
                         className="save-button"

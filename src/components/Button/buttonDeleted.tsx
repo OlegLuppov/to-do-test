@@ -6,7 +6,7 @@ import { ButtonProps } from '../../interfaces/interfaceButton'
 export const ButtonDeleted: React.FC<ButtonProps> = ({ onClick }) => {
   return (
     <IconButton onClick={onClick}>
-      <DeleteIcon sx={{ color: 'red' }} />
+      <DeleteIcon sx={{ color: '#f44336' }} />
     </IconButton>
   )
 }
