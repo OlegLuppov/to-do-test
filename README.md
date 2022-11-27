@@ -53,4 +53,4 @@ Back-end:
 
 ## SCREENSHOT APP
 
-![Screenshot_1](https://github.com/OlegLuppov/to-do-test/blob/master/public/image/screenshots/screenshot%20todos%20App.png)
+![Screenshot_1](https://github.com/OlegLuppov/to-do-test/blob/master/public/image/screenshots/screenshot.png)
