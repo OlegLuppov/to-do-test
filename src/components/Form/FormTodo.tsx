@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { Button } from '../Button/Button'
 import { InputDate } from '../Input/InputDate'
@@ -7,9 +7,11 @@ import { Label } from '../Input/labels/LableI'
 import { addTodo } from '../../store/sliceTodos'
 import './form.less'
 import './inputWrapper.less'
-import { doc, updateDoc } from 'firebase/firestore'
+import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '../fire_base/firebase'
+import { Todo } from '../../Types/typeListTodos'
 
+let todos: Todo[] = []
 export const FormTodo: React.FC = () => {
   const [valueTitle, setValueTitle] = useState('')
   const [valueDate, setValueDate] = useState('')
@@ -71,16 +73,24 @@ export const FormTodo: React.FC = () => {
         dateWarning: 'date-todo',
       }
 
-      dispatch(addTodo([todo, ...arrTodos])) // спредим обьект todo в inishialState => arrTodods
+      todos = [todo, ...todos]
 
-      setValueTitle('') // очищаю value главного input в state
-      setValueDate('')
+      dispatch(addTodo(todos)) // спредим обьект todo в inishialState => arrTodods
       updateDoc(doc(db, 'list', 'myTodos'), {
         // обновляем firestore
-        list: arrTodos,
+        list: todos,
       })
+      setValueTitle('') // очищаю value главного input в state
+      setValueDate('')
     }
   }
+
+  useEffect(() => {
+    onSnapshot(collection(db, 'list'), (snapshot) => {
+      const data = snapshot.docs.map((doc) => doc.data())
+      todos = data[0].list as Todo[]
+    })
+  }, [])
 
   return (
     <section className="form-wrapper">

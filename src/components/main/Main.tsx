@@ -13,6 +13,7 @@ export const Main: React.FC = () => {
 
   useEffect(() => {
     // при любом изьенении страницы получаю из firestore массив totdos и передаю в initialState => arrTodos
+
     onSnapshot(collection(db, 'list'), (snapshot) => {
       const data = snapshot.docs.map((doc) => doc.data())
       dispatch(addTodo(data[0].list as Todo[]))
