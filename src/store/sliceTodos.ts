@@ -62,6 +62,9 @@ const todosSlice = createSlice({
           todo.dateWarning = 'date-todo'
           todo.isSpanTag = !todo.isSpanTag
         }
+        if (todo.id + 4 === props.id) {
+          todo.file = props.file!
+        }
       })
       updateDoc(doc(db, 'list', 'myTodos'), {
         // обновляем firestore

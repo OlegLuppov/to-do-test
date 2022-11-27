@@ -7,6 +7,7 @@ export type Todo = {
   isPTag: boolean
   isSpanTag: boolean
   dateWarning: string
+  file: string
 }
 
 export type Todos = {

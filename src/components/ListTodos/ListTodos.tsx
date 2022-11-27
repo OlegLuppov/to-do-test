@@ -27,6 +27,10 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
     const target = e.target as HTMLInputElement
     setValueDate(target.value)
   }
+  const changeInputFileHandler = (e: React.ChangeEvent<HTMLElement>, todo: Todo) => {
+    const target = e.target as HTMLInputElement
+    dispatch(updateTodo({ id: todo.id + 4, file: target.value }))
+  }
 
   const changeContentHandler = (todo: Todo) => {
     setValueTitle(todo.title)
@@ -105,14 +109,14 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
               <div className="date-wrapper">
                 <>
                   {todo.isSpanTag ? (
-                    <>
+                    <div className="wrapper-edit-date">
                       <ButtonEditDate
                         className="date-edit"
                         onClick={() => changeDateHandler(todo)}
                         name="button-edit"
                       />
                       <span className={todo.dateWarning}>{todo.date}</span>
-                    </>
+                    </div>
                   ) : (
                     <form className="wrapper-form-save">
                       <div className="input-wrapper">
@@ -133,6 +137,19 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                     </form>
                   )}
                 </>
+                <input
+                  type="file"
+                  id="file"
+                  className="file"
+                  multiple
+                  onChange={(e) => {
+                    changeInputFileHandler(e, todo)
+                  }}
+                />
+
+                <label htmlFor="file" className="label-file">
+                  {todo.file}
+                </label>
               </div>
             </li>
           )

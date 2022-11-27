@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { useAppDispatch } from '../../store/hooks'
 import { Button } from '../Button/Button'
 import { InputDate } from '../Input/InputDate'
 import { InputItem } from '../Input/InputItem'
@@ -19,7 +19,6 @@ export const FormTodo: React.FC = () => {
   const [labelDate, setLabelDate] = useState('дата')
   const [labelTitleClass, setLabelTitleClass] = useState('label-item')
   const [labelDateClass, setLabelDateClass] = useState('label-item')
-  const arrTodos = useAppSelector((state) => state.toDos.arrTodos)
 
   const dispatch = useAppDispatch()
 
@@ -71,6 +70,7 @@ export const FormTodo: React.FC = () => {
         isPTag: true,
         isSpanTag: true,
         dateWarning: 'date-todo',
+        file: 'прикрепите файл',
       }
 
       todos = [todo, ...todos]

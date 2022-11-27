@@ -26,9 +26,9 @@
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
       .font();
-      padding: 10px;
+      padding: 15px;
       background-color: rgb(245, 245, 245);
 
       .wrapper-item-content {
@@ -43,7 +43,8 @@
 
           .wrapper-form-save {
             display: flex;
-            gap: 10px;
+            gap: 5px;
+            flex-wrap: wrap;
           }
 
           .content-todos {
@@ -59,14 +60,23 @@
 
       .date-wrapper {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         gap: 10px;
         padding-left: 52px;
+        padding-right: 13px;
 
-        .wrapper-form-save {
+        .wrapper-edit-date {
           display: flex;
           align-items: center;
           gap: 10px;
+        }
+
+        .wrapper-form-save {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 5px;
         }
 
         .date-todo {
@@ -82,12 +92,35 @@
           height: 24px;
           text-align: center;
           .font();
-          padding: 5px;
           border-bottom: 1px solid #f44336;
           color: #f44336;
+          padding-top: 5px;
+          padding-bottom: 5px;
         }
         .performed {
           background-color: green;
+        }
+        .file {
+          display: none;
+        }
+
+        .label-file {
+          .font();
+          color: #fff;
+          background-color: #4caf50;
+          border-radius: 4px;
+          cursor: pointer;
+          padding: 7.5px 6px 7.5px 6px;
+          box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
+            rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+          &:active {
+            -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+            -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+            box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+          }
+        }
+        .label-file:hover {
+          background-color: #388e3c;
         }
       }
     }
