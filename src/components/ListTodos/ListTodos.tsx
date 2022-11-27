@@ -8,6 +8,8 @@ import { InputItem } from '../Input/InputItem'
 import './list.less'
 import { ButtonDeleted } from '../Button/buttonDeleted'
 import { Label } from '../Input/labels/LableI'
+import { ButtonEditDate } from '../Button/bottonEditDate'
+import { ButtonEditContent } from '../Button/ButtonEditContent'
 
 export const ListTodos: React.FC<Todos> = ({ todos }) => {
   const [valueTitle, setValueTitle] = useState('') // value из главного input записываем в state
@@ -57,49 +59,60 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
         {todos.map((todo) => {
           return (
             <li key={todo.id}>
-              <div className="content-wrapper">
-                <InputCheckBox
-                  onChange={() => {
-                    dispatch(updateTodo({ id: todo.id + 1 }))
-                  }}
-                  completed={todo.completed}
-                />
-                <>
-                  {todo.isPTag ? (
-                    <p
-                      id={`${todo.id}`}
-                      className={todo.classCompletedContent}
-                      onClick={() => changeContentHandler(todo)}
-                    >
-                      {todo.title}
-                    </p>
-                  ) : (
-                    <form className="wrapper-form-save">
-                      <div className="input-wrapper">
-                        <InputItem
-                          type="text"
-                          placeholder="редактировать"
-                          onChange={changeInputTitleHandler}
-                          autoFocus={true}
-                          value={valueTitle}
+              <div className="wrapper-item-content">
+                <div className="content-wrapper">
+                  <InputCheckBox
+                    onChange={() => {
+                      dispatch(updateTodo({ id: todo.id + 1 }))
+                    }}
+                    completed={todo.completed}
+                  />
+                  <>
+                    {todo.isPTag ? (
+                      <>
+                        <ButtonEditContent
+                          className="content-edit"
+                          onClick={() => changeContentHandler(todo)}
+                          name="button-edit"
                         />
-                        <Label className="label-item" titleLabel="изменить задачу" />
-                      </div>
-                      <Button
-                        name="сохранить"
-                        className="save-button"
-                        onClick={() => saveContentHandler(todo)}
-                      />
-                    </form>
-                  )}
-                </>
+                        <p id={`${todo.id}`} className={todo.classCompletedContent}>
+                          {todo.title}
+                        </p>
+                      </>
+                    ) : (
+                      <form className="wrapper-form-save">
+                        <div className="input-wrapper">
+                          <InputItem
+                            type="text"
+                            placeholder="редактировать"
+                            onChange={changeInputTitleHandler}
+                            autoFocus={true}
+                            value={valueTitle}
+                          />
+                          <Label className="label-item" titleLabel="изменить задачу" />
+                        </div>
+                        <Button
+                          name="сохранить"
+                          className="save-button"
+                          onClick={() => saveContentHandler(todo)}
+                        />
+                      </form>
+                    )}
+                  </>
+                </div>
+                <ButtonDeleted name="delete" onClick={() => dispatch(removeTodo(todo.id))} />
               </div>
               <div className="date-wrapper">
                 <>
                   {todo.isSpanTag ? (
-                    <span onClick={() => changeDateHandler(todo)} className={todo.dateWarning}>
-                      {todo.date}
-                    </span>
+                    <>
+                      <ButtonEditDate
+                        className="date-edit"
+                        onClick={() => changeDateHandler(todo)}
+                        name="button-edit"
+                      />
+                      <span className={todo.dateWarning}>{todo.date}</span>
+                    </>
                   ) : (
                     <form className="wrapper-form-save">
                       <div className="input-wrapper">
@@ -120,7 +133,6 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                     </form>
                   )}
                 </>
-                <ButtonDeleted name="delete" onClick={() => dispatch(removeTodo(todo.id))} />
               </div>
             </li>
           )
