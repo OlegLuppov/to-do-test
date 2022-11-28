@@ -29,7 +29,9 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
   }
   const changeInputFileHandler = (e: React.ChangeEvent<HTMLElement>, todo: Todo) => {
     const target = e.target as HTMLInputElement
-    dispatch(updateTodo({ id: todo.id + 4, file: target.value }))
+    if (target.value !== '') {
+      dispatch(updateTodo({ id: todo.id + 4, file: target.value }))
+    }
   }
 
   const changeContentHandler = (todo: Todo) => {
@@ -137,19 +139,21 @@ export const ListTodos: React.FC<Todos> = ({ todos }) => {
                     </form>
                   )}
                 </>
-                <input
-                  type="file"
-                  id="file"
-                  className="file"
-                  multiple
-                  onChange={(e) => {
-                    changeInputFileHandler(e, todo)
-                  }}
-                />
+                <div className="file-wrapper">
+                  <input
+                    type="file"
+                    id="file"
+                    className="file"
+                    multiple
+                    onChange={(e) => {
+                      changeInputFileHandler(e, todo)
+                    }}
+                  />
 
-                <label htmlFor="file" className="label-file">
-                  {todo.file}
-                </label>
+                  <label htmlFor="file" className="label-file">
+                    {todo.file}
+                  </label>
+                </div>
               </div>
             </li>
           )

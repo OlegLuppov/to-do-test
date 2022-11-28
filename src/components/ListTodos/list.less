@@ -60,9 +60,8 @@
 
       .date-wrapper {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
+        flex-direction: column;
+        gap: 15px;
         padding-left: 52px;
         padding-right: 13px;
 
@@ -100,27 +99,33 @@
         .performed {
           background-color: green;
         }
-        .file {
-          display: none;
-        }
+        .file-wrapper {
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
 
-        .label-file {
-          .font();
-          color: #fff;
-          background-color: #4caf50;
-          border-radius: 4px;
-          cursor: pointer;
-          padding: 7.5px 6px 7.5px 6px;
-          box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
-            rgb(0 0 0 / 12%) 0px 1px 5px 0px;
-          &:active {
-            -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-            -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-            box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+          .file {
+            display: none;
           }
-        }
-        .label-file:hover {
-          background-color: #388e3c;
+
+          .label-file {
+            .font();
+            color: #fff;
+            background-color: #4caf50;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 7.5px 6px 7.5px 6px;
+            box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
+              rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+            &:active {
+              -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+              -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+              box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+            }
+          }
+          .label-file:hover {
+            background-color: #388e3c;
+          }
         }
       }
     }
