@@ -29,7 +29,7 @@ const todosSlice = createSlice({
     // здесь сравниваем текущую дату со свойством date в обьекте todo и меняем его свойства если date < текущей
     warningDateTodo: (state, action: PayloadAction<string>) => {
       state.arrTodos.map((todo) => {
-        if (currentDate > todo.date) {
+        if (todo.date < currentDate  ) {
           todo.dateWarning = action.payload
           todo.date = 'срок истек'
           updateDoc(doc(db, 'list', 'myTodos'), {
