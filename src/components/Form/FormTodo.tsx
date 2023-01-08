@@ -10,6 +10,7 @@ import './inputWrapper.less'
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '../fire_base/firebase'
 import { Todo } from '../../Types/typeListTodos'
+import { configCurrentDate } from '../constants/date'
 
 let todos: Todo[] = []
 export const FormTodo: React.FC = () => {
@@ -90,6 +91,7 @@ export const FormTodo: React.FC = () => {
       const data = snapshot.docs.map((doc) => doc.data())
       todos = data[0].list as Todo[]
     })
+    configCurrentDate()
   }, [])
 
   return (

@@ -5,6 +5,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
+  devtool: 'eval-cheap-source-map',
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, './dist'),
